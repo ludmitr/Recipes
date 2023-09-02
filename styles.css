@@ -1,0 +1,149 @@
+/* Reset default browser styles */
+body, h1, h2, ul, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Global styles */
+body {
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+/* Revamped add-recipe section */
+#add-recipe {
+  grid-column: 1 / 2;
+  padding: 1.5rem;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  text-align: center;
+  max-height: 450px;  /* Set to a fixed height */
+  overflow-y: auto;   /* Scrollbar if content overflows */
+}
+
+#add-recipe h2 {
+  font-size: 2em;
+  margin-bottom: 1rem;
+  color: #4CAF50;
+}
+
+#recipe-form label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#recipe-form input,
+#recipe-form textarea {
+  width: 90%;
+  padding: 0.6rem;
+  margin: 0 5%;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+
+#recipe-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+#recipe-form button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Recipe Display Section */
+#display-recipes {
+  grid-column: 2 / 3;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  /* No max-height property */
+}
+
+#recipe-display-area {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.recipe-card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Styling the Recipe Name */
+.recipe-card h3 {
+  font-size: 1.5em;
+  margin-bottom: 0.5rem;
+  color: #333;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 0.3rem;
+}
+
+/* Styling Ingredients and Steps */
+.recipe-card p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+/* Specific styling for ingredients */
+.recipe-card p:nth-child(2) {
+  color: #4CAF50;
+}
+
+/* Specific styling for steps */
+.recipe-card p:nth-child(3) {
+  color: #f44336;
+}
+
+/* Styling the Delete Button */
+.recipe-card button {
+  background-color: #f44336;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.recipe-card button:hover {
+  background-color: #d32f2f;
+}
+
+.recipe-card button:active {
+  background-color: #c62828;
+}
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}

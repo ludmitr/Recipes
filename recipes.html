@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe Keeper</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 📜 1. Crafting the Header -->
+  <header>
+    <h1>Recipe Keeper</h1>
+  </header>
+
+  <main>
+    <!-- 📝 2. Designing the Recipe Input Section -->
+    <section id="add-recipe">
+      <h2>Add Recipe</h2>
+      <form id="recipe-form">
+        <label for="recipe-name">Recipe Name:</label>
+        <input type="text" id="recipe-name" placeholder="Recipe Name">
+
+        <label for="recipe-ingredients">Ingredients:</label>
+        <textarea id="recipe-ingredients" placeholder="List ingredients separated by commas"></textarea>
+
+        <label for="recipe-steps">Steps:</label>
+        <textarea id="recipe-steps" placeholder="Steps for preparation"></textarea>
+        
+        <label for="recipeImage">Recipe Image URL:</label>
+        <input type="url" id="recipeImage" name="recipeImage" placeholder="http://example.com/my-dish.jpg">
+
+        <button type="submit" onclick="addRecipe(event)">Add Recipe</button>
+      </form>
+    </section>
+
+    <!-- 🖥️ 3. Setting Up the Recipe Display Area -->
+    <section id="display-recipes">
+      <h2>Your Recipes</h2>
+      <div id="recipe-display-area">
+        <!-- Recipes will appear here -->
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
