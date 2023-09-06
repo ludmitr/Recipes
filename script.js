@@ -102,12 +102,22 @@ function displayRecipe(recipe, recipeID) {
 }
 
 function deleteRecipe(index){
-    try {
-        recipes.splice(index, 1);
-        localStorage.setItem('recipes', JSON.stringify(recipes));
-    } catch (e) {
-        console.error("Error in deleteRecipe function:", e);
-    }
+    // requestOptions = {method: 'DELETE'}
+    fetch(`${recipesBaseUrl}/recipes/${index}`, {method: 'DELETE'})
+    .then(response => {
+      // Check if the response status is OK (204 No Content typically for DELETE requests)
+      if (response.status === 200) {
+        console.log(`Recipe with ID ${recipeIdToDelete} successfully deleted.`);
+      } else if (response.status === 404) {
+        console.log(`Recipe with ID ${recipeIdToDelete} not found.`);
+      } else {
+        console.error(`Failed to delete recipe. Status: ${response.status}`);
+      }
+    })
+    .catch(error => {
+      console.error("Fetch error:", error);
+    });
+    
 }
 
 function validateRecipeData(name, ingredients, steps, image) {
