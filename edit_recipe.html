@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <section id="add-recipe">
+        <h2>Add Recipe</h2>
+        <form id="recipe-form">
+          <label for="recipe-name">Recipe Name:</label>
+          <input type="text" id="recipe-name" placeholder="Recipe Name">
+  
+          <label for="recipe-ingredients">Ingredients:</label>
+          <textarea id="recipe-ingredients" placeholder="List ingredients separated by commas"></textarea>
+  
+          <label for="recipe-steps">Steps:</label>
+          <textarea id="recipe-steps" placeholder="Steps for preparation"></textarea>
+          
+          <label for="recipeImage">Recipe Image URL:</label>
+          <input type="url" id="recipeImage" name="recipeImage" placeholder="http://example.com/my-dish.jpg">
+  
+          <button type="submit" onclick="editRecipe(event)">Edit Recipe</button>
+        </form>
+      </section>
+      <script src="edit_recipe_script.js"></script>
+</body>
+</html>

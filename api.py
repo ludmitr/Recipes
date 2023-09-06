@@ -75,6 +75,15 @@ def read_recipes():
     return load_recipes()
 
 
+@app.get("/search")
+async def search_results(value: str = ""):
+    """ return search results"""
+    recipes = load_recipes()
+    search_results = [recipe for recipe in recipes if value.lower() in recipe['name'].lower()]
+    return search_results
+
+
+
 @app.post("/recipes")
 def create_recipe(recipe: Recipe):
     """Create a new recipe.

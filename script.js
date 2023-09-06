@@ -1,7 +1,22 @@
-let displayArea = document.getElementById("recipe-display-area")
-const recipesBaseUrl = "http://127.0.0.1:8000"
+let displayArea = document.getElementById("recipe-display-area");
+const recipesBaseUrl = "http://127.0.0.1:8000";
+const EDIT_PAGE = "edit_recipe.html"
 displayRecipes();
+const searchTag = document.getElementById("search-input");
 
+
+
+searchTag.addEventListener("input", (e) =>{
+    console.log(e.target.value);
+    fetch(`${recipesBaseUrl}/search?value=${e.target.value}`)
+    .then(res => res.json())
+    .then(recipes =>{
+        displayArea.innerHTML = "";
+        recipes.forEach(element => {
+            displayRecipe(element, element.id)
+        });
+    })
+})
 
 
 function addRecipe(event){
@@ -9,7 +24,7 @@ function addRecipe(event){
 
     // getting data from form
     const recipeName = document.getElementById("recipe-name").value;
-    const recipeIngredients = document.getElementById("recipe-ingredients").value;
+    let recipeIngredients = document.getElementById("recipe-ingredients").value;
     const recipeSteps = document.getElementById("recipe-steps").value;
     const recepeImage = document.getElementById("recipeImage").value;
 
@@ -28,8 +43,9 @@ function addRecipe(event){
         steps: recipeSteps,
         image: recepeImage
     }
-
     addRecipeToAPI(newRecipe);
+
+
     // Clear the form fields
     let form = document.getElementById("recipe-form");
     form.reset();
@@ -44,7 +60,7 @@ function displayRecipe(recipe, recipeID) {
     // Create an image for recipe
     let recipeImage = new Image();
     recipeImage.style.width = '100%';
-    recipeImage.style.height = 'auto';  
+    recipeImage.style.height = '50%';  
     recipeImage.src = recipe.image;
     recipeDiv.appendChild(recipeImage);
 
@@ -71,8 +87,18 @@ function displayRecipe(recipe, recipeID) {
     });
     recipeDiv.appendChild(deleteButton);
 
-    // add the new recipe div to the display area
-    displayArea.appendChild(recipeDiv);
+    // adding edit button to recipe
+    let editButton = document.createElement('button');
+    editButton.textContent = "Edit";
+    editButton.className = "edit-button"; // Add the "edit-button" class
+    editButton.addEventListener('click', function() {
+        // Redirect
+        const recipeID  = parseInt(recipeDiv.dataset.recipeID, 10);
+        window.location.href = `${EDIT_PAGE}?recipeID=${recipeID}`;
+    });
+    recipeDiv.appendChild(editButton);
+
+    displayArea.append(recipeDiv);
 }
 
 function deleteRecipe(index){
@@ -108,11 +134,6 @@ function getListOfIngredients(ingredients) {
     return trimmedIngredients;
 }
 
-// Example usage:
-const ingredientsString = "Ingredient 1, Ingredient 2, Ingredient 3";
-const ingredientsArray = getListOfIngredients(ingredientsString);
-console.log(ingredientsArray);
-
 
 //------------- API REQUESTS --------------
 // all requests, in case response.ok -> update the reciepes desplayed
@@ -120,13 +141,11 @@ async function displayRecipes() {
     displayArea.innerHTML = "";
     try {
         const response = await fetch(`${recipesBaseUrl}/recipes`);
-        
         if (!response.ok) {
             throw new Error("Failed to fetch recipes.");
         }
 
         const recipes = await response.json();
-        
         for (let index = 0; index < recipes.length; index++) {
             const recipe = recipes[index];
             displayRecipe(recipe, recipe.id);
